@@ -1,9 +1,16 @@
+// server.js (as shown above, with dotenv at the top and logging)
 'use strict';
+
+// Load environment variables from .env *FIRST*
+require('dotenv').config();
+
+// Log the DB environment variable for debugging
+console.log("DB environment variable:", process.env.DB);
 
 const express     = require('express');
 const bodyParser  = require('body-parser');
 const cors        = require('cors');
-require('dotenv').config();
+//require('dotenv').config(); // Moved to the very top
 
 const apiRoutes         = require('./routes/api.js');
 const fccTestingRoutes  = require('./routes/fcctesting.js');
@@ -27,9 +34,9 @@ app.route('/')
 //For FCC testing purposes
 fccTestingRoutes(app);
 
-//Routing for API 
-apiRoutes(app);  
-    
+//Routing for API
+apiRoutes(app);
+
 //404 Not Found Middleware
 app.use(function(req, res, next) {
   res.status(404)
